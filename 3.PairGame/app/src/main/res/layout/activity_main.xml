@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:id="@+id/scoreTextView"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESTART"
+            android:textSize="20sp"
+            android:onClick="onButtonRestart"
+            />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/card00"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card01"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card02"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card03"
+            style="@style/card_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/card10"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card11"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card12"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card13"
+            style="@style/card_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/card20"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card21"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card22"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card23"
+            style="@style/card_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/card30"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card31"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card32"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card33"
+            style="@style/card_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/card40"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card41"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card42"
+            style="@style/card_button" />
+        <ImageButton
+            android:id="@+id/card43"
+            style="@style/card_button" />
+    </LinearLayout>
+</LinearLayout>
