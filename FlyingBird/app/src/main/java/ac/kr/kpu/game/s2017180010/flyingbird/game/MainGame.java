@@ -16,7 +16,7 @@ public class MainGame {
     public float frameTime;
     private static final int BALL_COUNT = 10;
     private boolean initialized;
-    private Block block;
+    private ArrayList<Block> blocks;
 
     public static MainGame get(){
         if (instance == null){
@@ -38,8 +38,9 @@ public class MainGame {
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
 
-        block = new Block(100, 100);
-        gameObjects.add(block);
+
+        Obstacle obstacle = new Obstacle(5, 5, 300, 300);
+        gameObjects.add(obstacle);
         initialized = true;
         return true;
     }

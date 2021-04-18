@@ -9,7 +9,7 @@ import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
-public class Block implements GameObject {
+public class Block {
     private float x, y;
     private static Bitmap bitmap;
 
@@ -24,12 +24,18 @@ public class Block implements GameObject {
         }
     }
 
-    public void update()
-    {
-
-    }
-
     public void draw(Canvas canvas) {
         canvas.drawBitmap(bitmap, x, y, null);
     }
+
+    public int getWidth()
+    {
+        return bitmap.getWidth();
+    }
+
+    public int getHeight()
+    {
+        return bitmap.getHeight();
+    }
+
 }
