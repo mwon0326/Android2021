@@ -17,7 +17,7 @@ import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
 
-    public static float MULTIPLIER = 2;
+    public static float MULTIPLIER = 1;
     private boolean running;
     //    private Ball b1, b2;
 

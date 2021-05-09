@@ -19,7 +19,7 @@ public class ScrollBackground implements GameObject {
     private RectF dstRect = new RectF();
 
     public ScrollBackground(int resId, int speed) {
-        this.speed = speed;
+        this.speed = speed * GameView.MULTIPLIER;
         bitmap = GameBitmap.load(resId);
 
         int vw = GameView.view.getWidth();

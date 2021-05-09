@@ -18,6 +18,7 @@ public class MainGame {
     private static final int BALL_COUNT = 10;
     private boolean initialized;
     private ArrayList<Block> blocks;
+    Player player;
 
     public static MainGame get(){
         if (instance == null){
@@ -39,7 +40,7 @@ public class MainGame {
 
     ArrayList<ArrayList<GameObject>> layers;
     public enum Layer{
-        bg, obstacle, player, LAYER_COUNT
+        bg, obstacle, player, egg, LAYER_COUNT
     }
     public boolean initResources() {
         if (initialized)
@@ -63,6 +64,8 @@ public class MainGame {
         ScrollBackground ground = new ScrollBackground(R.mipmap.bg_ground, 150);
         add(Layer.bg, ground);
 
+        player = new Player(200, h - 260);
+        add(Layer.player, player);
         initialized = true;
         return true;
     }
@@ -98,6 +101,7 @@ public class MainGame {
         // if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
         if (action == MotionEvent.ACTION_DOWN)
         {
+            player.layEgg();
             return true;
         }
 
