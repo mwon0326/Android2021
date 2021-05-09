@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
@@ -25,11 +26,21 @@ public class MainGame {
         return instance;
     }
 
-    public void add(GameObject gameObject)
+    public void add(Layer layer, GameObject gameObject)
     {
-        gameObjects.add(gameObject);
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<GameObject> objects = layers.get(layer.ordinal());
+                objects.add(gameObject);
+            }
+        });
     }
 
+    ArrayList<ArrayList<GameObject>> layers;
+    public enum Layer{
+        bg, obstacle, player, LAYER_COUNT
+    }
     public boolean initResources() {
         if (initialized)
             return false;
@@ -38,23 +49,48 @@ public class MainGame {
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
 
-
+        initLayers(Layer.LAYER_COUNT.ordinal());
         Obstacle obstacle = new Obstacle(5, 5, 300, 300);
-        gameObjects.add(obstacle);
+        add(Layer.obstacle, obstacle);
+
+        ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);
+        add(Layer.bg, sky);
+        ScrollBackground mountain1 = new ScrollBackground(R.mipmap.bg_mountain_01, 120);
+        add(Layer.bg, mountain1);
+        ScrollBackground mountain2 = new ScrollBackground(R.mipmap.bg_mountain_02, 150);
+        add(Layer.bg, mountain2);
+
+        ScrollBackground ground = new ScrollBackground(R.mipmap.bg_ground, 150);
+        add(Layer.bg, ground);
+
         initialized = true;
         return true;
     }
 
+    private void initLayers(int layerCount)
+    {
+        layers = new ArrayList<>();
+        for (int i = 0; i < layerCount; i++) {
+            layers.add(new ArrayList<>());
+        }
+    }
+
     public void update()
     {
-        for(GameObject o: gameObjects)
-            o.update();
+        for (ArrayList<GameObject> objects: layers) {
+            for (GameObject o : objects) {
+                o.update();
+            }
+        }
     }
 
     public void draw(Canvas canvas)
     {
-        for(GameObject o: gameObjects)
-            o.draw(canvas);
+        for (ArrayList<GameObject> objects: layers) {
+            for (GameObject o : objects) {
+                o.draw(canvas);
+            }
+        }
     }
 
     public boolean onTouchEvent(MotionEvent event) {
