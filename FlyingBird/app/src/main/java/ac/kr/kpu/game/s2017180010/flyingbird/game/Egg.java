@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class Egg implements GameObject {
     private float x,y;
@@ -29,6 +30,6 @@ public class Egg implements GameObject {
 
     public int getHeight()
     {
-        return bitmap.getHeight();
+        return (int)(bitmap.getHeight() * GameView.MULTIPLIER);
     }
 }

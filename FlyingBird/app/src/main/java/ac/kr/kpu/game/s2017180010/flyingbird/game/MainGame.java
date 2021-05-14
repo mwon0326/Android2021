@@ -56,15 +56,17 @@ public class MainGame {
 
         ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);
         add(Layer.bg, sky);
-        ScrollBackground mountain1 = new ScrollBackground(R.mipmap.bg_mountain_01, 120);
-        add(Layer.bg, mountain1);
-        ScrollBackground mountain2 = new ScrollBackground(R.mipmap.bg_mountain_02, 150);
-        add(Layer.bg, mountain2);
+        ScrollBackground cloud1 = new ScrollBackground(R.mipmap.bg_cloud_01, 120);
+        add(Layer.bg, cloud1);
+        ScrollBackground cloud2 = new ScrollBackground(R.mipmap.bg_cloud_02, 150);
+        add(Layer.bg, cloud2);
+        ScrollBackground cloud3 = new ScrollBackground(R.mipmap.bg_cloud_03, 180);
+        add(Layer.bg, cloud3);
 
-        ScrollBackground ground = new ScrollBackground(R.mipmap.bg_ground, 150);
+        ScrollBackground ground = new ScrollBackground(R.mipmap.bg_ground, 100);
         add(Layer.bg, ground);
 
-        player = new Player(200, h - 260);
+        player = new Player(200, h - 300);
         add(Layer.player, player);
         initialized = true;
         return true;

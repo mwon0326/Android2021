@@ -4,14 +4,15 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
+import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class ScrollBackground implements GameObject {
     private Bitmap bitmap;
-    private Bitmap resize_bitmap;
     private final float speed;
     private float scroll;
 
@@ -21,20 +22,15 @@ public class ScrollBackground implements GameObject {
     public ScrollBackground(int resId, int speed) {
         this.speed = speed * GameView.MULTIPLIER;
         bitmap = GameBitmap.load(resId);
-
-        int vw = GameView.view.getWidth();
-        int vh = GameView.view.getHeight();
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        resize_bitmap = Bitmap.createScaledBitmap(bitmap, w, vh, true);
-        w = resize_bitmap.getWidth();
-        h = resize_bitmap.getHeight();
         srcRect.set(0, 0, w, h);
 
         float l = 0;
         float t = 0;
         float r = GameView.view.getWidth();
         float b = r * h / w;
+
         dstRect.set(l, t, r, b);
     }
     @Override
@@ -48,8 +44,8 @@ public class ScrollBackground implements GameObject {
     public void draw(Canvas canvas) {
         int vw = GameView.view.getWidth();
         int vh = GameView.view.getHeight();
-        int iw = resize_bitmap.getWidth();
-        int ih = resize_bitmap.getHeight();
+        int iw = bitmap.getWidth();
+        int ih = bitmap.getHeight();
         int dw = vh * iw / ih;
 
         int curr = (int)scroll % dw;
@@ -57,7 +53,7 @@ public class ScrollBackground implements GameObject {
 
         while (curr < vw) {
             dstRect.set(curr, 0, curr + dw, vh);
-            canvas.drawBitmap(resize_bitmap, srcRect, dstRect, null);
+            canvas.drawBitmap(bitmap, srcRect, dstRect, null);
             curr += dw;
         }
     }
