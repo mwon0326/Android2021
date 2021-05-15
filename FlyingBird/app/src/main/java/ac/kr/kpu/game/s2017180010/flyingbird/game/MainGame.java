@@ -41,6 +41,17 @@ public class MainGame {
         });
     }
 
+    public void remove(Layer layer, GameObject gameObject)
+    {
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<GameObject> objects = layers.get(layer.ordinal());
+                objects.remove(gameObject);
+            }
+        });
+    }
+
     ArrayList<ArrayList<GameObject>> layers;
     public enum Layer{
         bg, obstacle, player, egg, LAYER_COUNT
@@ -98,6 +109,16 @@ public class MainGame {
 
         if (CollisionHelper.collideSide(block, player))
             Log.d("MainGame", "Dead");
+
+        ArrayList<GameObject> eggs = layers.get(Layer.egg.ordinal());
+        for (GameObject object: eggs)
+        {
+            Egg egg = (Egg) object;
+            if (CollisionHelper.collideSide(block, egg)) {
+                remove(Layer.egg, egg);
+                player.setEggCount(1);
+            }
+        }
     }
 
     public void draw(Canvas canvas)
@@ -121,15 +142,6 @@ public class MainGame {
         return false;
     }
 
-    public void remove(GameObject gameObject)
-    {
-        GameView.view.post(new Runnable() {
-            @Override
-            public void run() {
-                gameObjects.remove(gameObject);
-            }
-        });
-    }
 
     public void setObstacleSize(int width, int height)
     {

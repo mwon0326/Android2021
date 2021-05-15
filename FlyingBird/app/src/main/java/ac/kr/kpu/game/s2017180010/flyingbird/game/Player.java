@@ -65,4 +65,9 @@ public class Player implements GameObject, BoxCollidable {
     public void getBoundingRect(RectF rect) {
         playerBitmap.getBoundingRect(x, y, rect);
     }
+
+    public void setEggCount(int amount)
+    {
+        eggCount -= amount;
+    }
 }
