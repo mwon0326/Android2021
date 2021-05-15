@@ -51,7 +51,14 @@ public class MainGame {
         int h = GameView.view.getHeight();
 
         initLayers(Layer.LAYER_COUNT.ordinal());
-        Obstacle obstacle = new Obstacle(5, 5, 300, 300);
+
+        Random random = new Random();
+        int max_rand = 5;
+        int min_rand = 1;
+        int widRand = random.nextInt(max_rand + min_rand + 1) + min_rand;
+        int heiRand = random.nextInt(max_rand - 2 + min_rand + 1) + min_rand;
+
+        Obstacle obstacle = new Obstacle(300, h - 300, 100);
         add(Layer.obstacle, obstacle);
 
         ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);

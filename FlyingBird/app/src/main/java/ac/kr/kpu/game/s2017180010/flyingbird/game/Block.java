@@ -4,38 +4,63 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class Block {
     private float x, y;
-    private static Bitmap bitmap;
-
+    private static GameBitmap bitmap;
+    private boolean isDraw;
     public Block(float x, float y)
     {
         this.x = x;
         this.y = y;
 
         if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.block);
+            bitmap = new GameBitmap(R.mipmap.block);
         }
+
+        this.isDraw = false;
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, x, y, null);
+        if (isDraw)
+            bitmap.draw(canvas, x, y);
     }
 
     public int getWidth()
     {
-        return bitmap.getWidth();
+        return (int)(bitmap.getWidth() * GameView.MULTIPLIER);
     }
 
     public int getHeight()
     {
-        return bitmap.getHeight();
+        return (int)(bitmap.getHeight() * GameView.MULTIPLIER);
     }
 
+    public void updatePostion(float dx, float dy)
+    {
+        this.x += dx;
+        this.y += dy;
+    }
+
+    public void setPosition(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setIsDraw(boolean isDraw)
+    {
+        this.isDraw = isDraw;
+    }
+
+    public float getX()
+    {
+        return x;
+    }
 }
