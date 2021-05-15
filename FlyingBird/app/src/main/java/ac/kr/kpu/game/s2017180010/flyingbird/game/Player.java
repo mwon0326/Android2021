@@ -2,6 +2,7 @@ package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
@@ -17,15 +18,20 @@ public class Player implements GameObject, BoxCollidable {
     private int eggCount;
     private int MAX_EGG_COUNT = 5;
     private GameBitmap playerFaceBitmap;
+    private float bottom;
+    private final float GROUND;
+    private boolean isOverGround;
 
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
         this.tx = x;
         this.ty = 0;
-        this.speed = 800;
         this.playerBitmap = new GameBitmap(R.mipmap.egg);
         this.playerFaceBitmap = new GameBitmap(R.mipmap.bird_face);
+        bottom = this.y;
+        GROUND = this.y;
+        isOverGround = false;
     }
 
     @Override
@@ -66,8 +72,41 @@ public class Player implements GameObject, BoxCollidable {
         playerBitmap.getBoundingRect(x, y, rect);
     }
 
-    public void setEggCount(int amount)
+    public void changeEggCount(int amount)
     {
         eggCount -= amount;
+        bottom -= amount * getHeight();
+    }
+
+    public float getBottom()
+    {
+        return bottom;
+    }
+
+
+    public void down(float amount)
+    {
+        y += amount;
+        bottom += amount;
+
+        if (bottom >= GROUND)
+        {
+            y = GROUND - (this.getHeight() * eggCount);
+            bottom = GROUND;
+            isOverGround = false;
+
+            MainGame game = MainGame.get();
+            game.obstacle.obstacleInit();
+            game.obstacle.obstacleSet();
+        }
+    }
+    public boolean getIsOverGround()
+    {
+        return isOverGround;
+    }
+
+    public void setIsOverGround(boolean isOverGround)
+    {
+        this.isOverGround = isOverGround;
     }
 }

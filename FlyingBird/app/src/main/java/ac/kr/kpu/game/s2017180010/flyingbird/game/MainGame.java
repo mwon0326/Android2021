@@ -20,8 +20,10 @@ public class MainGame {
     private boolean initialized;
     private ArrayList<Block> blocks;
     private Player player;
-    private Obstacle obstacle;
+    public Obstacle obstacle;
     private int obstacleWidth = 0, obstacleHeight = 0;
+    private int GROUND = 0;
+    private static final int GRAVITY = 9;
 
     public static MainGame get(){
         if (instance == null){
@@ -81,10 +83,12 @@ public class MainGame {
         ScrollBackground ground = new ScrollBackground(R.mipmap.bg_ground, 100);
         add(Layer.bg, ground);
 
-        player = new Player(200, h - 300);
+        GROUND = h - 300;
+        player = new Player(200, GROUND);
         add(Layer.player, player);
 
         initialized = true;
+
         return true;
     }
 
@@ -104,19 +108,42 @@ public class MainGame {
             }
         }
 
-        String key = '0' + Integer.toString(obstacleHeight - 1);
-        Block block = obstacle.getBlock(key);
-
-        if (CollisionHelper.collideSide(block, player))
-            Log.d("MainGame", "Dead");
-
+        String key;
+        Block block;
         ArrayList<GameObject> eggs = layers.get(Layer.egg.ordinal());
-        for (GameObject object: eggs)
+
+        if (player.getIsOverGround())
         {
-            Egg egg = (Egg) object;
-            if (CollisionHelper.collideSide(block, egg)) {
-                remove(Layer.egg, egg);
-                player.setEggCount(1);
+            key = Integer.toString(obstacleWidth - 1) + Integer.toString(obstacleHeight - 1);
+            block = obstacle.getBlock(key);
+
+            if (CollisionHelper.overBlock(block, player)) {
+                player.down(frameTime * 800);
+                int count = 0;
+                for (GameObject object: eggs) {
+                    Egg egg = (Egg) object;
+                    egg.down(frameTime * 800, player.getIsOverGround(),
+                            GROUND - (count * egg.getHeight()));
+                    count += 1;
+                }
+            }
+        }
+        else
+        {
+            key = '0' + Integer.toString(obstacleHeight - 1);
+            block = obstacle.getBlock(key);
+
+            if (CollisionHelper.collideSide(block, player))
+                Log.d("MainGame", "Dead");
+
+            for (GameObject object: eggs)
+            {
+                Egg egg = (Egg) object;
+                if (CollisionHelper.collideSide(block, egg)) {
+                    remove(Layer.egg, egg);
+                    player.changeEggCount(1);
+                    player.setIsOverGround(true);
+                }
             }
         }
     }

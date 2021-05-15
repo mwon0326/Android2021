@@ -17,4 +17,12 @@ public class CollisionHelper {
 
         return (rect2.right > rect1.left) && (rect2.bottom > rect1.top);
     }
+
+    public static boolean overBlock(Block block, BoxCollidable object)
+    {
+        block.getBoundingRect(rect1);
+        object.getBoundingRect(rect2);
+
+        return (rect1.right < rect2.left);
+    }
 }

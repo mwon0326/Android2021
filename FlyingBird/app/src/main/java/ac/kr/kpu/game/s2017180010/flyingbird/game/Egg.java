@@ -40,4 +40,14 @@ public class Egg implements GameObject, BoxCollidable {
     public void getBoundingRect(RectF rect) {
         bitmap.getBoundingRect(x, y, rect);
     }
+
+    public void down(float amount, boolean isOverGround, float bottom)
+    {
+        this.y += amount;
+
+        if (!isOverGround)
+        {
+            this.y = bottom;
+        }
+    }
 }
