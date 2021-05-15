@@ -4,14 +4,16 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.RectF;
 import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
-public class Block {
+public class Block implements GameObject, BoxCollidable {
     private float x, y;
     private static GameBitmap bitmap;
     private boolean isDraw;
@@ -25,6 +27,11 @@ public class Block {
         }
 
         this.isDraw = false;
+    }
+
+    @Override
+    public void update() {
+
     }
 
     public void draw(Canvas canvas) {
@@ -62,5 +69,10 @@ public class Block {
     public float getX()
     {
         return x;
+    }
+
+    @Override
+    public void getBoundingRect(RectF rect) {
+        bitmap.getBoundingRect(x, y, rect);
     }
 }

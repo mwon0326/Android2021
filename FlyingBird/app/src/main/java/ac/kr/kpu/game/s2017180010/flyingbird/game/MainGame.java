@@ -1,6 +1,7 @@
 package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -18,7 +19,9 @@ public class MainGame {
     private static final int BALL_COUNT = 10;
     private boolean initialized;
     private ArrayList<Block> blocks;
-    Player player;
+    private Player player;
+    private Obstacle obstacle;
+    private int obstacleWidth = 0, obstacleHeight = 0;
 
     public static MainGame get(){
         if (instance == null){
@@ -52,13 +55,7 @@ public class MainGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        Random random = new Random();
-        int max_rand = 5;
-        int min_rand = 1;
-        int widRand = random.nextInt(max_rand + min_rand + 1) + min_rand;
-        int heiRand = random.nextInt(max_rand - 2 + min_rand + 1) + min_rand;
-
-        Obstacle obstacle = new Obstacle(300, h - 300, 100);
+        obstacle = new Obstacle(300, h - 300, 100);
         add(Layer.obstacle, obstacle);
 
         ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);
@@ -75,6 +72,7 @@ public class MainGame {
 
         player = new Player(200, h - 300);
         add(Layer.player, player);
+
         initialized = true;
         return true;
     }
@@ -94,6 +92,12 @@ public class MainGame {
                 o.update();
             }
         }
+
+        String key = '0' + Integer.toString(obstacleHeight - 1);
+        Block block = obstacle.getBlock(key);
+
+        if (CollisionHelper.collideSide(block, player))
+            Log.d("MainGame", "Dead");
     }
 
     public void draw(Canvas canvas)
@@ -125,5 +129,11 @@ public class MainGame {
                 gameObjects.remove(gameObject);
             }
         });
+    }
+
+    public void setObstacleSize(int width, int height)
+    {
+        obstacleWidth = width;
+        obstacleHeight = height;
     }
 }

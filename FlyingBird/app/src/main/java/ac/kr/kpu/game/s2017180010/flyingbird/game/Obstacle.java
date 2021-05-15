@@ -13,7 +13,6 @@ import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 public class Obstacle implements GameObject {
     int width, height;
     float x, y;
-    // private ArrayList<Block> blocks;
     private final float speed;
     private final int MAX_WIDTH = 3;
     private final int MAX_HEIGHT = 5;
@@ -27,7 +26,6 @@ public class Obstacle implements GameObject {
         this.y = y;
         this.speed = speed * GameView.MULTIPLIER;
 
-        // blocks = new ArrayList<Block>();
         blocks = new HashMap<String, Block>();
 
         bw = 0;
@@ -130,5 +128,13 @@ public class Obstacle implements GameObject {
                 blocks.get(key).setIsDraw(true);
             }
         }
+
+        MainGame game = MainGame.get();
+        game.setObstacleSize(width, height);
+    }
+
+    public Block getBlock(String key)
+    {
+        return blocks.get(key);
     }
 }
