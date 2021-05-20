@@ -24,8 +24,10 @@ public class MainGame {
     private int obstacleWidth = 0, obstacleHeight = 0;
     private int GROUND = 0;
     private static final int GRAVITY = 9;
-    private boolean shootingMode = false;
+    public boolean shootingMode = true;
     private int combo = 0;
+    private final float SHOOTING_TIME = 10.f;
+    private float shootingTime = 0;
 
     public static MainGame get(){
         if (instance == null){
@@ -90,7 +92,7 @@ public class MainGame {
         add(Layer.player, player);
 
         initialized = true;
-        shootingMode = false;
+        shootingMode = true;
 
         return true;
     }
@@ -118,7 +120,19 @@ public class MainGame {
 
         if (shootingMode)
         {
-            
+            shootingTime += frameTime;
+            if (shootingTime >= SHOOTING_TIME)
+            {
+                shootingMode = false;
+                shootingTime = 0;
+                combo = 0;
+            }
+
+            if (player.getIsOverGround())
+            {
+                player.down(frameTime * 400);
+            }
+
         }
         else
         {
@@ -189,7 +203,14 @@ public class MainGame {
         // if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
         if (action == MotionEvent.ACTION_DOWN)
         {
-            player.layEgg();
+            Egg egg = player.layEgg();
+
+            if (shootingMode)
+            {
+                remove(Layer.egg, egg);
+                player.changeEggCount(1);
+                player.setIsOverGround(true);
+            }
             return true;
         }
 

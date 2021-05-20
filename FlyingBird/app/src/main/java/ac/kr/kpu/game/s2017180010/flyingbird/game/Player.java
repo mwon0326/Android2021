@@ -41,10 +41,12 @@ public class Player implements GameObject, BoxCollidable {
     public void update() {
         MainGame game = MainGame.get();
 
-        fireTime += game.frameTime;
-        if (fireTime >= FIRE_INTERVAL) {
-            fireBullet();
-            fireTime -= FIRE_INTERVAL;
+        if (game.shootingMode) {
+            fireTime += game.frameTime;
+            if (fireTime >= FIRE_INTERVAL) {
+                fireBullet();
+                fireTime -= FIRE_INTERVAL;
+            }
         }
     }
 
@@ -55,7 +57,7 @@ public class Player implements GameObject, BoxCollidable {
         playerFaceBitmap.draw(canvas, x, y);
     }
 
-    public void layEgg() {
+    public Egg layEgg() {
         if (eggCount < MAX_EGG_COUNT)
         {
             Egg egg = new Egg(this.x, this.y);
@@ -63,7 +65,10 @@ public class Player implements GameObject, BoxCollidable {
             game.add(MainGame.Layer.egg, egg);
             y -= egg.getHeight();
             eggCount += 1;
+
+            return egg;
         }
+        return null;
     }
 
     public int getWidth()
