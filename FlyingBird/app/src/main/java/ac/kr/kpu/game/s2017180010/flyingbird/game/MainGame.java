@@ -26,9 +26,8 @@ public class MainGame {
     private static final int GRAVITY = 9;
     public boolean shootingMode = true;
     private int combo = 0;
-    private final float SHOOTING_TIME = 10.f;
-    private float shootingTime = 0;
     private Score score;
+    public Timer shootingTimer;
 
     public static MainGame get(){
         if (instance == null){
@@ -97,6 +96,9 @@ public class MainGame {
         score.setScore(0);
         add(Layer.ui, score);
 
+        shootingTimer = new Timer(w / 2, 300, false);
+        add(Layer.ui, shootingTimer);
+
         initialized = true;
         shootingMode = false;
 
@@ -126,11 +128,9 @@ public class MainGame {
 
         if (shootingMode)
         {
-            shootingTime += frameTime;
-            if (shootingTime >= SHOOTING_TIME)
+            if (shootingTimer.getStopTimer())
             {
                 shootingMode = false;
-                shootingTime = 0;
                 combo = 0;
             }
 
@@ -219,8 +219,11 @@ public class MainGame {
                 }
             }
 
-            if (combo >= 10)
+            if (combo >= 5) {
                 shootingMode = true;
+                shootingTimer.setDraw(true);
+                shootingTimer.setStopTimer(false);
+            }
         }
     }
 
