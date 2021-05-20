@@ -120,4 +120,6 @@ public class Player implements GameObject, BoxCollidable {
     {
         this.isOverGround = isOverGround;
     }
+
+    public int getEggCount() { return eggCount; }
 }

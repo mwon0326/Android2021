@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
@@ -18,6 +19,7 @@ public class Obstacle implements GameObject {
     private final int MAX_HEIGHT = 5;
     private HashMap<String, Block> blocks;
     int bw, bh;
+
     private static final String TAG = Obstacle.class.getSimpleName();
 
     public Obstacle(float x, float y, int speed)
@@ -65,12 +67,12 @@ public class Obstacle implements GameObject {
             for (int j = 0; j < MAX_HEIGHT; j++)
             {
                 key = Integer.toString(i) + Integer.toString(j);
-                blocks.get(key).updatePostion(-amount, 0);
+                Objects.requireNonNull(blocks.get(key)).updatePostion(-amount, 0);
             }
         }
 
         key = Integer.toString(MAX_WIDTH - 1) + Integer.toString(MAX_HEIGHT - 1);
-        if (blocks.get(key).getX() < 0)
+        if (Objects.requireNonNull(blocks.get(key)).getX() < 0 && !game.player.getIsOverGround())
         {
             obstacleInit();
             obstacleSet();
@@ -85,7 +87,7 @@ public class Obstacle implements GameObject {
             for (int j = 0; j < MAX_HEIGHT; j++)
             {
                 key = Integer.toString(i) + Integer.toString(j);
-                blocks.get(key).draw(canvas);
+                Objects.requireNonNull(blocks.get(key)).draw(canvas);
             }
         }
     }

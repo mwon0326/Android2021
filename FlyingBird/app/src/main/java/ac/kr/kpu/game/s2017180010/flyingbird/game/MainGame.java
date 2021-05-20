@@ -19,12 +19,13 @@ public class MainGame {
     private static final int BALL_COUNT = 10;
     private boolean initialized;
     private ArrayList<Block> blocks;
-    private Player player;
+    public Player player;
     public Obstacle obstacle;
     private int obstacleWidth = 0, obstacleHeight = 0;
     private int GROUND = 0;
     private static final int GRAVITY = 9;
     private boolean shootingMode = false;
+    private int combo = 0;
 
     public static MainGame get(){
         if (instance == null){
@@ -115,65 +116,62 @@ public class MainGame {
         ArrayList<GameObject> eggs = layers.get(Layer.egg.ordinal());
         ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
 
-        /*for (int i = 0; i < obstacleWidth; i++)
+        if (shootingMode)
         {
-            boolean collided = false;
-            for (int j = 0; j < obstacleHeight; j++)
-            {
-                key = Integer.toString(i) + Integer.toString(j);
-                block = obstacle.getBlock(key);
-
-                for (GameObject object: bullets)
-                {
-                    Bullet bullet = (Bullet) object;
-                    if (CollisionHelper.collideSide(block, bullet))
-                    {
-                        remove(Layer.bullet, bullet);
-                        block.setIsDraw(false);
-                        collided = true;
-                        break;
-                    }
-                }
-                if (collided)
-                    break;
-            }
-            if (collided)
-                break;
-        }*/
-
-        if (player.getIsOverGround())
-        {
-            key = Integer.toString(obstacleWidth - 1) + Integer.toString(obstacleHeight - 1);
-            block = obstacle.getBlock(key);
-
-            if (CollisionHelper.overBlock(block, player)) {
-                player.down(frameTime * 800);
-                int count = 0;
-                for (GameObject object: eggs) {
-                    Egg egg = (Egg) object;
-                    egg.down(frameTime * 800, player.getIsOverGround(),
-                            GROUND - (count * egg.getHeight()));
-                    count += 1;
-                }
-            }
+            
         }
         else
         {
-            key = '0' + Integer.toString(obstacleHeight - 1);
-            block = obstacle.getBlock(key);
-
-            if (CollisionHelper.collideSide(block, player))
-                Log.d("MainGame", "Dead");
-
-            for (GameObject object: eggs)
+            if (player.getIsOverGround())
             {
-                Egg egg = (Egg) object;
-                if (CollisionHelper.collideSide(block, egg)) {
-                    remove(Layer.egg, egg);
-                    player.changeEggCount(1);
-                    player.setIsOverGround(true);
+                key = Integer.toString(obstacleWidth - 1) + Integer.toString(obstacleHeight - 1);
+                block = obstacle.getBlock(key);
+
+                if (CollisionHelper.overBlock(block, player)) {
+                    player.down(frameTime * 800);
+                    int count = 0;
+                    for (GameObject object: eggs) {
+                        Egg egg = (Egg) object;
+                        egg.down(frameTime * 800, player.getIsOverGround(),
+                                GROUND - (count * egg.getHeight()));
+                        count += 1;
+                    }
                 }
             }
+            else
+            {
+                key = '0' + Integer.toString(obstacleHeight - 1);
+                block = obstacle.getBlock(key);
+
+                if (CollisionHelper.collideSide(block, player))
+                    Log.d("MainGame", "Dead");
+
+                boolean comboCheck = true;
+                int checkCount = 0;
+
+                for (GameObject object: eggs)
+                {
+                    Egg egg = (Egg) object;
+                    if (CollisionHelper.collideSide(block, egg)) {
+                        if (comboCheck && checkCount == 0)
+                        {
+                            if (player.getEggCount() == obstacleHeight)
+                            {
+                                combo += 1;
+                                comboCheck = false;
+                                Log.d("MainGame", "Combo : " + combo);
+                            }
+                        }
+                        remove(Layer.egg, egg);
+                        player.changeEggCount(1);
+                        player.setIsOverGround(true);
+                        checkCount += 1;
+                    }
+                }
+            }
+
+            if (combo >= 5)
+                shootingMode = true;
         }
     }
 
