@@ -28,6 +28,7 @@ public class MainGame {
     private int combo = 0;
     private final float SHOOTING_TIME = 10.f;
     private float shootingTime = 0;
+    private Score score;
 
     public static MainGame get(){
         if (instance == null){
@@ -60,7 +61,7 @@ public class MainGame {
 
     ArrayList<ArrayList<GameObject>> layers;
     public enum Layer{
-        bg, obstacle, bullet, player, egg, LAYER_COUNT
+        bg, obstacle, bullet, player, egg, ui, LAYER_COUNT
     }
     public boolean initResources() {
         if (initialized)
@@ -90,6 +91,11 @@ public class MainGame {
         GROUND = h - 300;
         player = new Player(200, GROUND);
         add(Layer.player, player);
+
+        int margin = (int) (20 * GameView.MULTIPLIER);
+        score = new Score(w - margin, margin);
+        score.setScore(0);
+        add(Layer.ui, score);
 
         initialized = true;
         shootingMode = false;
@@ -149,6 +155,7 @@ public class MainGame {
                         {
                             remove(Layer.bullet, bullet);
                             block.setIsDraw(false);
+                            score.addScore(50);
                             collided = true;
                             break;
                         }
@@ -201,6 +208,7 @@ public class MainGame {
                                 combo += 1;
                                 comboCheck = false;
                                 Log.d("MainGame", "Combo : " + combo);
+                                score.addScore(30);
                             }
                         }
                         remove(Layer.egg, egg);
@@ -211,7 +219,7 @@ public class MainGame {
                 }
             }
 
-            if (combo >= 5)
+            if (combo >= 10)
                 shootingMode = true;
         }
     }
