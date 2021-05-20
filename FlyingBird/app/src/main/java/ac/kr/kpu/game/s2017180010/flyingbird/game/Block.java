@@ -66,6 +66,11 @@ public class Block implements GameObject, BoxCollidable {
         this.isDraw = isDraw;
     }
 
+    public boolean getIsDraw()
+    {
+        return isDraw;
+    }
+
     public float getX()
     {
         return x;

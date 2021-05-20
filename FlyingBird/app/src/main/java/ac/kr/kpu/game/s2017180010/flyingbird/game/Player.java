@@ -21,6 +21,8 @@ public class Player implements GameObject, BoxCollidable {
     private float bottom;
     private final float GROUND;
     private boolean isOverGround;
+    private float fireTime;
+    private float FIRE_INTERVAL = 1.0f / 7.5f;
 
     public Player(float x, float y) {
         this.x = x;
@@ -32,11 +34,18 @@ public class Player implements GameObject, BoxCollidable {
         bottom = this.y;
         GROUND = this.y;
         isOverGround = false;
+        this.fireTime = 0.0f;
     }
 
     @Override
     public void update() {
+        MainGame game = MainGame.get();
 
+        fireTime += game.frameTime;
+        if (fireTime >= FIRE_INTERVAL) {
+            fireBullet();
+            fireTime -= FIRE_INTERVAL;
+        }
     }
 
     @Override
@@ -78,9 +87,11 @@ public class Player implements GameObject, BoxCollidable {
         bottom -= amount * getHeight();
     }
 
-    public float getBottom()
+    public void fireBullet()
     {
-        return bottom;
+        Bullet bullet = new Bullet(this.x, this.y, 1000);
+        MainGame game = MainGame.get();
+        game.add(MainGame.Layer.bullet, bullet);
     }
 
 

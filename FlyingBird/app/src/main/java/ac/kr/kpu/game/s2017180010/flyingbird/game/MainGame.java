@@ -24,6 +24,7 @@ public class MainGame {
     private int obstacleWidth = 0, obstacleHeight = 0;
     private int GROUND = 0;
     private static final int GRAVITY = 9;
+    private boolean shootingMode = false;
 
     public static MainGame get(){
         if (instance == null){
@@ -56,7 +57,7 @@ public class MainGame {
 
     ArrayList<ArrayList<GameObject>> layers;
     public enum Layer{
-        bg, obstacle, player, egg, LAYER_COUNT
+        bg, obstacle, bullet, player, egg, LAYER_COUNT
     }
     public boolean initResources() {
         if (initialized)
@@ -88,6 +89,7 @@ public class MainGame {
         add(Layer.player, player);
 
         initialized = true;
+        shootingMode = false;
 
         return true;
     }
@@ -111,6 +113,33 @@ public class MainGame {
         String key;
         Block block;
         ArrayList<GameObject> eggs = layers.get(Layer.egg.ordinal());
+        ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
+
+        /*for (int i = 0; i < obstacleWidth; i++)
+        {
+            boolean collided = false;
+            for (int j = 0; j < obstacleHeight; j++)
+            {
+                key = Integer.toString(i) + Integer.toString(j);
+                block = obstacle.getBlock(key);
+
+                for (GameObject object: bullets)
+                {
+                    Bullet bullet = (Bullet) object;
+                    if (CollisionHelper.collideSide(block, bullet))
+                    {
+                        remove(Layer.bullet, bullet);
+                        block.setIsDraw(false);
+                        collided = true;
+                        break;
+                    }
+                }
+                if (collided)
+                    break;
+            }
+            if (collided)
+                break;
+        }*/
 
         if (player.getIsOverGround())
         {
