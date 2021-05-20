@@ -203,10 +203,13 @@ public class MainGame {
         // if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
         if (action == MotionEvent.ACTION_DOWN)
         {
-            Egg egg = player.layEgg();
-
+            if (!shootingMode && !player.getIsOverGround()) {
+                Egg egg = player.layEgg();
+            }
             if (shootingMode)
             {
+                Egg egg = player.layEgg();
+                
                 remove(Layer.egg, egg);
                 player.changeEggCount(1);
                 player.setIsOverGround(true);

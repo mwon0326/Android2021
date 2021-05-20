@@ -112,8 +112,10 @@ public class Player implements GameObject, BoxCollidable {
             isOverGround = false;
 
             MainGame game = MainGame.get();
-            game.obstacle.obstacleInit();
-            game.obstacle.obstacleSet();
+            if (!game.shootingMode) {
+                game.obstacle.obstacleInit();
+                game.obstacle.obstacleSet();
+            }
         }
     }
     public boolean getIsOverGround()
