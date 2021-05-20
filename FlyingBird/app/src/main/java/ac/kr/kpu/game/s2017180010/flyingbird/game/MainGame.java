@@ -92,7 +92,7 @@ public class MainGame {
         add(Layer.player, player);
 
         initialized = true;
-        shootingMode = true;
+        shootingMode = false;
 
         return true;
     }
@@ -131,6 +131,33 @@ public class MainGame {
             if (player.getIsOverGround())
             {
                 player.down(frameTime * 400);
+            }
+
+            for (int i = 0; i < obstacleWidth; i++)
+            {
+                boolean collided = false;
+
+                for (int j = 0; j < obstacleHeight; j++)
+                {
+                    key = Integer.toString(i) + Integer.toString(j);
+                    block = obstacle.getBlock(key);
+
+                    for(GameObject object : bullets)
+                    {
+                        Bullet bullet = (Bullet)object;
+                        if (CollisionHelper.collideSide(block, bullet))
+                        {
+                            remove(Layer.bullet, bullet);
+                            block.setIsDraw(false);
+                            collided = true;
+                            break;
+                        }
+                    }
+                    if (collided)
+                        break;
+                }
+                if (collided)
+                    break;
             }
 
         }
@@ -209,7 +236,7 @@ public class MainGame {
             if (shootingMode)
             {
                 Egg egg = player.layEgg();
-                
+
                 remove(Layer.egg, egg);
                 player.changeEggCount(1);
                 player.setIsOverGround(true);

@@ -22,7 +22,7 @@ public class Player implements GameObject, BoxCollidable {
     private final float GROUND;
     private boolean isOverGround;
     private float fireTime;
-    private float FIRE_INTERVAL = 1.0f / 7.5f;
+    private float FIRE_INTERVAL = 1.0f / 3.f;
 
     public Player(float x, float y) {
         this.x = x;
