@@ -70,11 +70,11 @@ public class Obstacle implements GameObject {
         }
 
         key = Integer.toString(MAX_WIDTH - 1) + Integer.toString(MAX_HEIGHT - 1);
-        ///if (blocks.get(key).getX() < 0)
-        //{
-            //obstacleInit();
-            //obstacleSet();
-       // }
+        if (blocks.get(key).getX() < 0)
+        {
+            obstacleInit();
+            obstacleSet();
+        }
     }
 
     public void draw(Canvas canvas)

@@ -15,6 +15,9 @@ public class CollisionHelper {
         block.getBoundingRect(rect1);
         object.getBoundingRect(rect2);
 
+        if (!block.getIsDraw())
+            return false;
+
         return (rect2.right > rect1.left) && (rect2.bottom > rect1.top);
     }
 
