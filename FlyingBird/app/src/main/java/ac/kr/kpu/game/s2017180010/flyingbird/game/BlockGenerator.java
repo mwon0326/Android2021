@@ -1,9 +1,7 @@
 package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
@@ -11,7 +9,7 @@ import java.util.Random;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
-public class Obstacle implements GameObject {
+public class BlockGenerator implements GameObject {
     int width, height;
     float x, y;
     private final float speed;
@@ -20,9 +18,9 @@ public class Obstacle implements GameObject {
     private HashMap<String, Block> blocks;
     int bw, bh;
 
-    private static final String TAG = Obstacle.class.getSimpleName();
+    private static final String TAG = BlockGenerator.class.getSimpleName();
 
-    public Obstacle(float x, float y, int speed)
+    public BlockGenerator(float x, float y, int speed)
     {
         this.x = x;
         this.y = y;

@@ -20,7 +20,7 @@ public class MainGame {
     private boolean initialized;
     private ArrayList<Block> blocks;
     public Player player;
-    public Obstacle obstacle;
+    public BlockGenerator blockGenerator;
     private int obstacleWidth = 0, obstacleHeight = 0;
     private int GROUND = 0;
     private static final int GRAVITY = 9;
@@ -72,8 +72,8 @@ public class MainGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        obstacle = new Obstacle(300, h - 300, 100);
-        add(Layer.obstacle, obstacle);
+        blockGenerator = new BlockGenerator(300, h - 300, 100);
+        add(Layer.obstacle, blockGenerator);
 
         ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);
         add(Layer.bg, sky);
@@ -146,7 +146,7 @@ public class MainGame {
                 for (int j = 0; j < obstacleHeight; j++)
                 {
                     key = Integer.toString(i) + Integer.toString(j);
-                    block = obstacle.getBlock(key);
+                    block = blockGenerator.getBlock(key);
 
                     for(GameObject object : bullets)
                     {
@@ -173,7 +173,7 @@ public class MainGame {
             if (player.getIsOverGround())
             {
                 key = Integer.toString(obstacleWidth - 1) + Integer.toString(obstacleHeight - 1);
-                block = obstacle.getBlock(key);
+                block = blockGenerator.getBlock(key);
 
                 if (CollisionHelper.overBlock(block, player)) {
                     player.down(frameTime * 800);
@@ -189,7 +189,7 @@ public class MainGame {
             else
             {
                 key = '0' + Integer.toString(obstacleHeight - 1);
-                block = obstacle.getBlock(key);
+                block = blockGenerator.getBlock(key);
 
                 if (CollisionHelper.collideSide(block, player))
                     Log.d("MainGame", "Dead");

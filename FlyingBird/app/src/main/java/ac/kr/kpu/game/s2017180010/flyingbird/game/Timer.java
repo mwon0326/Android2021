@@ -22,7 +22,7 @@ public class Timer implements GameObject {
 
     public Timer(int right, int top, boolean isDraw)
     {
-        bitmap = GameBitmap.load(R.mipmap.number);
+        bitmap = GameBitmap.load(R.mipmap.number_red);
         this.right = right;
         this.top = top;
         this.isDraw = isDraw;
@@ -37,7 +37,7 @@ public class Timer implements GameObject {
         if (game.shootingMode)
         {
             shootingTime -= game.frameTime;
-            if (shootingTime >= SHOOTING_END_TIME)
+            if (shootingTime <= 0)
             {
                 isDraw = false;
                 stopTimer = true;

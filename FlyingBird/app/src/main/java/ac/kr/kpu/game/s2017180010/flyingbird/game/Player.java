@@ -2,7 +2,6 @@ package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
@@ -12,8 +11,6 @@ import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class Player implements GameObject, BoxCollidable {
     private float x, y;
-    private float tx, ty;
-    private float speed;
     private GameBitmap playerBitmap;
     private int eggCount;
     private int MAX_EGG_COUNT = 5;
@@ -27,8 +24,6 @@ public class Player implements GameObject, BoxCollidable {
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
-        this.tx = x;
-        this.ty = 0;
         this.playerBitmap = new GameBitmap(R.mipmap.egg);
         this.playerFaceBitmap = new GameBitmap(R.mipmap.bird_face);
         bottom = this.y;
@@ -113,8 +108,8 @@ public class Player implements GameObject, BoxCollidable {
 
             MainGame game = MainGame.get();
             if (!game.shootingMode) {
-                game.obstacle.obstacleInit();
-                game.obstacle.obstacleSet();
+                game.blockGenerator.obstacleInit();
+                game.blockGenerator.obstacleSet();
             }
         }
     }
