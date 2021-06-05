@@ -33,7 +33,7 @@ public class Scene {
             }
         });
     }
-    
+
     public void remove(MainGame.Layer layer, GameObject gameObject)
     {
         GameView.view.post(new Runnable() {
