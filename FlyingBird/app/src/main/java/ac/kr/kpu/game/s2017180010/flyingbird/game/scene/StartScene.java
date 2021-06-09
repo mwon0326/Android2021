@@ -45,14 +45,13 @@ public class StartScene extends Scene {
     public boolean onTouchEvent(MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             if (startButton.touchButton(e.getX(), e.getY())) {
-                startButton.ChangeButton();
+                startButton.setPress();
                 return true;
             }
         }
         else if (e.getAction() == MotionEvent.ACTION_UP){
-            startButton.ChangeButton();
+            startButton.setDefault();
             if (startButton.touchButton(e.getX(), e.getY())) {
-                MainGame.get().popScene();
                 MainGame.get().push(new MainScene());
             }
             return true;

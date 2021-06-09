@@ -5,8 +5,10 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.Button;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Scene;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.BlockGenerator;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.ctroller.Collision;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Egg;
@@ -27,6 +29,7 @@ public class MainScene extends Scene {
     public Score score;
     public Timer shootingTimer;
     public int obstacleWidth = 0, obstacleHeight = 0;
+    private Button pauseButton;
 
     public enum Layer{
         bg, obstacle, bullet, player, egg, ui, controller, LAYER_COUNT
@@ -80,8 +83,12 @@ public class MainScene extends Scene {
         shootingTimer = new Timer(w / 2, 300, false);
         add(Layer.ui, shootingTimer);
 
-
         add(Layer.controller, new Collision(player));
+
+        pauseButton = new Button(100, 100, 100, 100,
+                R.mipmap.pause_button_default, R.mipmap.pause_button_press);
+        add(Layer.ui, pauseButton);
+
         shootingMode = false;
     }
 
@@ -90,6 +97,11 @@ public class MainScene extends Scene {
         // if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE)
         if (action == MotionEvent.ACTION_DOWN)
         {
+            if (pauseButton.touchButton(event.getX(), event.getY())) {
+                pauseButton.setPress();
+                return true;
+            }
+
             if (!shootingMode && !player.getIsOverGround()) {
                 Egg egg = player.layEgg();
             }
@@ -103,7 +115,14 @@ public class MainScene extends Scene {
             }
             return true;
         }
-
+        else if (action == MotionEvent.ACTION_UP)
+        {
+            pauseButton.setDefault();
+            if (pauseButton.touchButton(event.getX(), event.getY())) {
+                MainGame.get().push(new PauseScene());
+            }
+            return true;
+        }
         return false;
     }
 
