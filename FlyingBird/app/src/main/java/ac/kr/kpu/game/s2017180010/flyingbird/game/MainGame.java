@@ -20,7 +20,7 @@ public class MainGame extends BaseGame {
         if (initialized)
             return false;
 
-        push(new MainScene());
+        push(new StartScene());
         initialized = true;
 
         return true;

@@ -2,10 +2,7 @@ package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.RectF;
-
-import java.util.ArrayList;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
