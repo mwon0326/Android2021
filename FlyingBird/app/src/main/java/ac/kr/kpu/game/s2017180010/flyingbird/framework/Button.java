@@ -27,12 +27,14 @@ public class Button implements GameObject {
         dstRect.set(this.x, this.y, x + (width / 2), y + (height / 2));
     }
 
-    public void ChangeButton()
+    public void setDefault()
     {
-        if (preButton == defaultImage)
-            preButton = pressImage;
-        else
-            preButton = defaultImage;
+        preButton = defaultImage;
+    }
+
+    public void setPress()
+    {
+        preButton = pressImage;
     }
 
     public boolean touchButton(float x, float y)
