@@ -1,4 +1,4 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.game.ctroller;
 
 import android.graphics.Canvas;
 import android.util.Log;
@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Block;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Bullet;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Egg;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Player;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.MainScene;
 
 public class Collision implements GameObject {
     private final Player player;

@@ -1,4 +1,4 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.game.object;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
@@ -8,6 +8,7 @@ import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.MainScene;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class Player implements GameObject, BoxCollidable {

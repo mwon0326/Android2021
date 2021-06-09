@@ -1,4 +1,4 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.framework;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

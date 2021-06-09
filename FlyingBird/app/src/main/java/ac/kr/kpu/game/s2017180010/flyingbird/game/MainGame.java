@@ -1,11 +1,7 @@
 package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
-import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.StartScene;
 
 
 public class MainGame extends BaseGame {

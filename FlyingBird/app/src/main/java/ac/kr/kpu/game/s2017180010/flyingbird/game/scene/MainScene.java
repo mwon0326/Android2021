@@ -1,4 +1,4 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.game.scene;
 
 import android.view.MotionEvent;
 
@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Scene;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.BlockGenerator;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.ctroller.Collision;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Egg;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Player;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Score;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.ScrollBackground;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Timer;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class MainScene extends Scene {

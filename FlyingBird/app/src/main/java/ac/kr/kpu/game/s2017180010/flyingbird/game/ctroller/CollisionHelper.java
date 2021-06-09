@@ -1,10 +1,9 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.game.ctroller;
 
 import android.graphics.RectF;
-import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
-import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Block;
 
 public class CollisionHelper {
     private static RectF rect1 = new RectF();

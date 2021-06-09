@@ -1,10 +1,13 @@
-package ac.kr.kpu.game.s2017180010.flyingbird.game;
+package ac.kr.kpu.game.s2017180010.flyingbird.game.scene;
 
 import android.view.MotionEvent;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Scene;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.Button;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.ImageObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class StartScene extends Scene {
