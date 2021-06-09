@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
@@ -34,9 +35,9 @@ public class Player implements GameObject, BoxCollidable {
 
     @Override
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
 
-        if (game.shootingMode) {
+        if (MainScene.scene.shootingMode) {
             fireTime += game.frameTime;
             if (fireTime >= FIRE_INTERVAL) {
                 fireBullet();
@@ -56,8 +57,7 @@ public class Player implements GameObject, BoxCollidable {
         if (eggCount < MAX_EGG_COUNT)
         {
             Egg egg = new Egg(this.x, this.y);
-            MainGame game = MainGame.get();
-            game.add(MainGame.Layer.egg, egg);
+            MainScene.scene.add(MainScene.Layer.egg, egg);
             y -= egg.getHeight();
             eggCount += 1;
 
@@ -90,8 +90,7 @@ public class Player implements GameObject, BoxCollidable {
     public void fireBullet()
     {
         Bullet bullet = new Bullet(this.x, this.y, 1000);
-        MainGame game = MainGame.get();
-        game.add(MainGame.Layer.bullet, bullet);
+        MainScene.scene.add(MainScene.Layer.bullet, bullet);
     }
 
 
@@ -106,10 +105,9 @@ public class Player implements GameObject, BoxCollidable {
             bottom = GROUND;
             isOverGround = false;
 
-            MainGame game = MainGame.get();
-            if (!game.shootingMode) {
-                game.blockGenerator.obstacleInit();
-                game.blockGenerator.obstacleSet();
+            if (!MainScene.scene.shootingMode) {
+                MainScene.scene.blockGenerator.obstacleInit();
+                MainScene.scene.blockGenerator.obstacleSet();
             }
         }
     }

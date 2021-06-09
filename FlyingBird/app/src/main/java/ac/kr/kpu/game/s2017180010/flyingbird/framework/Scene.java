@@ -34,15 +34,25 @@ public class Scene {
         });
     }
 
-    public void remove(MainGame.Layer layer, GameObject gameObject)
+    public void remove(GameObject gameObject) {
+        remove(gameObject, true);
+    }
+    public void remove(GameObject gameObject, boolean delayed)
     {
-        GameView.view.post(new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                ArrayList<GameObject> objects = layers.get(layer.ordinal());
-                objects.remove(gameObject);
+                BaseGame game = BaseGame.get();
+                for (ArrayList<GameObject> objects: layers) {
+                    objects.remove(gameObject);
+                }
             }
-        });
+        };
+        if (delayed) {
+            GameView.view.post(runnable);
+        } else {
+            runnable.run();
+        }
     }
 
     public ArrayList<GameObject> objectsAt(int layerIndex) {

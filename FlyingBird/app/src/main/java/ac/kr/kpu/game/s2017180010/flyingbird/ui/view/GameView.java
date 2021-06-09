@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Sound;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
 
@@ -29,7 +30,6 @@ public class GameView extends View {
         GameView.view = this;
         Sound.init(context);
         running = true;
-//        startUpdating();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GameView extends View {
     }
 
     private void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         game.update();
 
         invalidate();
@@ -61,7 +61,7 @@ public class GameView extends View {
                 if (lastFrame == 0) {
                     lastFrame = time;
                 }
-                MainGame game = MainGame.get();
+                BaseGame game = BaseGame.get();
                 game.frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 update();
                 lastFrame = time;
@@ -72,13 +72,13 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         game.draw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         return game.onTouchEvent(event);
     }
 

@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
@@ -32,9 +33,9 @@ public class Timer implements GameObject {
 
     @Override
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
 
-        if (game.shootingMode)
+        if (MainScene.scene.shootingMode)
         {
             shootingTime -= game.frameTime;
             if (shootingTime <= 0)

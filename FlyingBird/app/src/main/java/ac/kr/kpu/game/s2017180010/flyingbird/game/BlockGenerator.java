@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
@@ -58,7 +59,7 @@ public class BlockGenerator implements GameObject {
     public void update()
     {
         String key;
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         float amount = speed * game.frameTime;
         for (int i = 0; i < MAX_WIDTH; i++)
         {
@@ -70,7 +71,7 @@ public class BlockGenerator implements GameObject {
         }
 
         key = Integer.toString(MAX_WIDTH - 1) + Integer.toString(MAX_HEIGHT - 1);
-        if (Objects.requireNonNull(blocks.get(key)).getX() < 0 && !game.player.getIsOverGround())
+        if (Objects.requireNonNull(blocks.get(key)).getX() < 0 && !MainScene.scene.player.getIsOverGround())
         {
             obstacleInit();
             obstacleSet();
@@ -129,8 +130,7 @@ public class BlockGenerator implements GameObject {
             }
         }
 
-        MainGame game = MainGame.get();
-        game.setObstacleSize(width, height);
+        MainScene.scene.setObstacleSize(width, height);
     }
 
     public Block getBlock(String key)

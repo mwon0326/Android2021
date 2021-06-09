@@ -10,11 +10,13 @@ import ac.kr.kpu.game.s2017180010.flyingbird.BuildConfig;
 
 public class BaseGame {
     protected static BaseGame instance;
+    public float frameTime;
+    ArrayList<Scene> sceneStack = new ArrayList<>();
+
     public static BaseGame get() {
         return instance;
     }
-    public float frameTime;
-    ArrayList<Scene> sceneStack = new ArrayList<>();
+
     protected BaseGame() {
         instance = this;
     }

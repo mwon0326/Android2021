@@ -5,6 +5,7 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
@@ -24,11 +25,11 @@ public class Bullet implements GameObject, BoxCollidable {
 
     @Override
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         x -= speed * game.frameTime;
 
         if (x < 0) {
-            game.remove(MainGame.Layer.bullet, this);
+            MainScene.scene.remove(this);
         }
     }
 

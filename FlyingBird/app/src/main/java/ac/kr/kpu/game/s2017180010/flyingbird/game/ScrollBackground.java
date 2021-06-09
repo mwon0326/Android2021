@@ -7,6 +7,7 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
@@ -35,7 +36,7 @@ public class ScrollBackground implements GameObject {
     }
     @Override
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         float amount = speed * game.frameTime;
         scroll += amount;
     }
