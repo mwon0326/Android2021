@@ -9,6 +9,7 @@ import ac.kr.kpu.game.s2017180010.flyingbird.framework.BoxCollidable;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.MainScene;
+import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class Bullet implements GameObject, BoxCollidable {
     private float x, y;
@@ -28,7 +29,7 @@ public class Bullet implements GameObject, BoxCollidable {
         BaseGame game = BaseGame.get();
         x -= speed * game.frameTime;
 
-        if (x < 0) {
+        if (x >= GameView.view.getWidth()) {
             MainScene.scene.remove(this);
         }
     }

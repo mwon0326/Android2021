@@ -39,6 +39,8 @@ public class Collision implements GameObject {
                 MainScene.scene.shootingMode = false;
                 MainScene.scene.combo = 0;
                 MainScene.scene.isTouch = false;
+                MainScene.scene.blockGenerator.obstacleInit();
+                MainScene.scene.blockGenerator.obstacleSet();
             }
 
             if (player.getIsOverGround())
