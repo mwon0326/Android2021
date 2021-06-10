@@ -1,5 +1,6 @@
 package ac.kr.kpu.game.s2017180010.flyingbird.game.scene;
 
+import android.media.SoundPool;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -8,13 +9,14 @@ import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Button;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.Scene;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.ScrollBackground;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.Sound;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
-import ac.kr.kpu.game.s2017180010.flyingbird.game.object.BlockGenerator;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.ctroller.Collision;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.object.BlockGenerator;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Egg;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Player;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Score;
-import ac.kr.kpu.game.s2017180010.flyingbird.framework.ScrollBackground;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Timer;
 import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
@@ -30,6 +32,7 @@ public class MainScene extends Scene {
     public Timer shootingTimer;
     public int obstacleWidth = 0, obstacleHeight = 0;
     private Button pauseButton;
+    private SoundPool bgm;
 
     public enum Layer{
         bg, obstacle, bullet, player, egg, ui, controller, LAYER_COUNT
@@ -113,6 +116,8 @@ public class MainScene extends Scene {
                 player.changeEggCount(1);
                 player.setIsOverGround(true);
             }
+
+            Sound.play(R.raw.effect);
             return true;
         }
         else if (action == MotionEvent.ACTION_UP)
@@ -131,4 +136,5 @@ public class MainScene extends Scene {
         obstacleWidth = width;
         obstacleHeight = height;
     }
+
 }

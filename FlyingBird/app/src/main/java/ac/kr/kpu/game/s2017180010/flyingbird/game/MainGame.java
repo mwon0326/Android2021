@@ -1,6 +1,8 @@
 package ac.kr.kpu.game.s2017180010.flyingbird.game;
 
+import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
+import ac.kr.kpu.game.s2017180010.flyingbird.framework.Sound;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.StartScene;
 
 

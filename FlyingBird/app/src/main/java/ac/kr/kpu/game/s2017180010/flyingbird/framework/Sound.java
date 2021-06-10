@@ -10,9 +10,9 @@ import java.util.HashMap;
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 
 public class Sound {
-    private static SoundPool soundPool;
+    public static SoundPool soundPool;
     private static final int[] SOUND_IDS = {
-            // R.raw.hadouken
+            R.raw.effect
     };
     private static HashMap<Integer, Integer> soundIdMap = new HashMap<>();
 
@@ -33,7 +33,7 @@ public class Sound {
         }
 
         for (int resId: SOUND_IDS) {
-            int soundId = soundPool.load(context, resId, 1);
+            int soundId = soundPool.load(context, resId, 2);
             soundIdMap.put(resId, soundId);
         }
     }
@@ -41,7 +41,7 @@ public class Sound {
     public static int play(int resId)
     {
         int soundId = soundIdMap.get(resId);
-        int streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
+        int streamId = soundPool.play(soundId, 1f, 1f, 2, 0, 1f);
         return streamId;
     }
 }
