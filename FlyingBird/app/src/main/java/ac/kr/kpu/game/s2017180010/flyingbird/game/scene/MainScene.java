@@ -22,7 +22,6 @@ import ac.kr.kpu.game.s2017180010.flyingbird.ui.view.GameView;
 
 public class MainScene extends Scene {
     public Player player;
-    public BlockGenerator blockGenerator;
 
     public int GROUND = 0;
     private static final int GRAVITY = 9;
@@ -33,6 +32,8 @@ public class MainScene extends Scene {
     public int obstacleWidth = 0, obstacleHeight = 0;
     private Button pauseButton;
     private SoundPool bgm;
+    public BlockGenerator blockGenerator;
+    public boolean isTouch;
 
     public enum Layer{
         bg, obstacle, bullet, player, egg, ui, controller, LAYER_COUNT
@@ -63,7 +64,7 @@ public class MainScene extends Scene {
         player = new Player(200, GROUND);
         add(Layer.player, player);
 
-        blockGenerator = new BlockGenerator(300, h - 300, 100);
+        blockGenerator = new BlockGenerator(300, h - 300, 200);
         add(Layer.obstacle, blockGenerator);
 
         ScrollBackground sky = new ScrollBackground(R.mipmap.bg_sky, 100);
@@ -93,6 +94,7 @@ public class MainScene extends Scene {
         add(Layer.ui, pauseButton);
 
         shootingMode = false;
+        isTouch = false;
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -108,7 +110,7 @@ public class MainScene extends Scene {
             if (!shootingMode && !player.getIsOverGround()) {
                 Egg egg = player.layEgg();
             }
-            if (shootingMode)
+            if (shootingMode && isTouch)
             {
                 Egg egg = player.layEgg();
 

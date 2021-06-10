@@ -20,6 +20,19 @@ public class CollisionHelper {
         return (rect2.right > rect1.left) && (rect2.bottom > rect1.top);
     }
 
+    public static boolean collideBullet(Block block, BoxCollidable object)
+    {
+        block.getBoundingRect(rect1);
+        object.getBoundingRect(rect2);
+
+        if (!block.getIsDraw())
+            return false;
+
+        if (rect2.bottom < rect1.top) return false;
+        if (rect2.top > rect1.bottom) return false;
+
+        return (rect2.right > rect1.left);
+    }
     public static boolean overBlock(Block block, BoxCollidable object)
     {
         block.getBoundingRect(rect1);

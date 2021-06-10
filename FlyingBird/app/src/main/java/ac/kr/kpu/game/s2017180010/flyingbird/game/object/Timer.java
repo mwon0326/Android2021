@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import java.util.ArrayList;
+
 import ac.kr.kpu.game.s2017180010.flyingbird.R;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameBitmap;

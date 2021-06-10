@@ -38,12 +38,14 @@ public class Collision implements GameObject {
             {
                 MainScene.scene.shootingMode = false;
                 MainScene.scene.combo = 0;
+                MainScene.scene.isTouch = false;
             }
 
             if (player.getIsOverGround())
             {
                 player.down(game.frameTime * 400);
             }
+
 
             for (int i = 0; i < MainScene.scene.obstacleWidth; i++)
             {
@@ -57,7 +59,7 @@ public class Collision implements GameObject {
                     for(GameObject object : bullets)
                     {
                         Bullet bullet = (Bullet)object;
-                        if (CollisionHelper.collideSide(block, bullet))
+                        if (CollisionHelper.collideBullet(block, bullet))
                         {
                             MainScene.scene.remove(bullet);
                             block.setIsDraw(false);
@@ -66,13 +68,13 @@ public class Collision implements GameObject {
                             break;
                         }
                     }
+
                     if (collided)
                         break;
                 }
                 if (collided)
                     break;
             }
-
         }
         else
         {
@@ -131,6 +133,9 @@ public class Collision implements GameObject {
                 MainScene.scene.shootingMode = true;
                 MainScene.scene.shootingTimer.setDraw(true);
                 MainScene.scene.shootingTimer.setStopTimer(false);
+                MainScene.scene.blockGenerator.obstacleInit();
+                MainScene.scene.blockGenerator.obstacleSet();
+                MainScene.scene.isTouch = true;
             }
         }
     }
