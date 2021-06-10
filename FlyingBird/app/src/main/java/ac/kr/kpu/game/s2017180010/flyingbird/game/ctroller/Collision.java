@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.BaseGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.framework.GameObject;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.MainGame;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Block;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Bullet;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Egg;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.object.Player;
+import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.GameOverScene;
 import ac.kr.kpu.game.s2017180010.flyingbird.game.scene.MainScene;
 
 public class Collision implements GameObject {
@@ -59,7 +61,7 @@ public class Collision implements GameObject {
                         {
                             MainScene.scene.remove(bullet);
                             block.setIsDraw(false);
-                            MainScene.scene.score.addScore(50);
+                            MainScene.score.addScore(50);
                             collided = true;
                             break;
                         }
@@ -95,8 +97,10 @@ public class Collision implements GameObject {
                 key = '0' + Integer.toString(MainScene.scene.obstacleHeight - 1);
                 block = MainScene.scene.blockGenerator.getBlock(key);
 
-                if (CollisionHelper.collideSide(block, player))
+                if (CollisionHelper.collideSide(block, player)) {
                     Log.d("MainGame", "Dead");
+                    MainGame.get().push(new GameOverScene());
+                }
 
                 boolean comboCheck = true;
                 int checkCount = 0;
@@ -112,7 +116,7 @@ public class Collision implements GameObject {
                                 MainScene.scene.combo += 1;
                                 comboCheck = false;
                                 Log.d("MainGame", "Combo : " + MainScene.scene.combo);
-                                MainScene.scene.score.addScore(30);
+                                MainScene.score.addScore(30);
                             }
                         }
                         MainScene.scene.remove(egg);

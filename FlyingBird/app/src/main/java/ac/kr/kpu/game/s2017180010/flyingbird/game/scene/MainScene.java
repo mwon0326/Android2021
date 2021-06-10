@@ -26,7 +26,7 @@ public class MainScene extends Scene {
     private static final int GRAVITY = 9;
     public boolean shootingMode = true;
     public int combo = 0;
-    public Score score;
+    public static Score score;
     public Timer shootingTimer;
     public int obstacleWidth = 0, obstacleHeight = 0;
     private Button pauseButton;

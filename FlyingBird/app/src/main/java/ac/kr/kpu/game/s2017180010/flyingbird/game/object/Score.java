@@ -35,6 +35,10 @@ public class Score implements GameObject {
         this.score += amount;
     }
 
+    public int getScore()
+    {
+        return this.score;
+    }
     @Override
     public void update() {
 
